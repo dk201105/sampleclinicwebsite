@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthFirst Clinic</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal50: #E1F5EE;
+      --teal100: #9FE1CB;
+      --teal400: #1D9E75;
+      --teal600: #0F6E56;
+      --teal800: #085041;
+      --cream: #F9F6F0;
+      --dark: #1A1A18;
+      --mid: #3A3A36;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--dark); }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2.5rem;
+      background: #fff;
+      border-bottom: 1px solid #ccc;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 600; color: var(--teal800); letter-spacing: -0.5px; }
+    .logo span { color: var(--dark); font-weight: 300; font-style: italic; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--dark); transition: color .2s; }
+    nav ul a:hover { color: var(--teal600); }
+    .nav-btn {
+      background: var(--teal600);
+      color: #fff;
+      border: none;
+      padding: 9px 22px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: background .2s;
+    }
+    .nav-btn:hover { background: var(--teal800); }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      padding: 5rem 2.5rem 4rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .hero-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal800);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-label::before { content: ''; width: 24px; height: 2px; background: var(--teal600); }
+    h1 { font-family: 'Fraunces', serif; font-size: 3.2rem; font-weight: 400; line-height: 1.15; letter-spacing: -1px; margin-bottom: 1.4rem; color: var(--dark); }
+    h1 em { font-style: italic; color: var(--teal600); }
+    .hero-desc { font-size: 16px; color: var(--mid); line-height: 1.8; margin-bottom: 2rem; max-width: 440px; font-weight: 400; }
+    .btn-group { display: flex; gap: 12px; align-items: center; }
+    .btn-primary {
+      background: var(--teal600);
+      color: #fff;
+      border: none;
+      padding: 13px 28px;
+      border-radius: 40px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: background .2s;
+    }
+    .btn-primary:hover { background: var(--teal800); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--dark);
+      border: 1.5px solid #888;
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all .2s;
+    }
+    .btn-ghost:hover { border-color: var(--teal400); color: var(--teal600); }
+
+    /* HERO CARD */
+    .hero-card { background: #fff; border-radius: 20px; padding: 2rem; border: 1px solid #d0cdc6; }
+    .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+    .stat { background: var(--cream); border-radius: 12px; padding: 1.2rem 1rem; border: 1px solid #ddd; }
+    .stat-num { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 600; color: var(--teal800); }
+    .stat-lbl { font-size: 13px; color: var(--mid); margin-top: 2px; font-weight: 500; }
+    .doctor-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 1rem;
+      background: var(--teal50);
+      border-radius: 12px;
+      border: 1px solid var(--teal100);
+    }
+    .doc-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--teal600);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .doc-info p { font-size: 14px; font-weight: 600; color: var(--dark); }
+    .doc-info span { font-size: 12px; color: var(--mid); font-weight: 500; }
+    .badge {
+      margin-left: auto;
+      background: var(--teal600);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    /* SERVICES */
+    .services-section { background: #fff; padding: 4rem 2.5rem; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+    .section-head { text-align: center; max-width: 500px; margin: 0 auto 3rem; }
+    .section-label { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--teal800); margin-bottom: .6rem; }
+    h2 { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 400; line-height: 1.25; letter-spacing: -.5px; color: var(--dark); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+    .service-card { background: var(--cream); border-radius: 16px; padding: 1.75rem 1.5rem; border: 1px solid #d8d5ce; transition: all .25s; }
+    .service-card:hover { background: #fff; border-color: var(--teal100); transform: translateY(-2px); }
+    .svc-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--teal50); border: 1px solid var(--teal100);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem; font-size: 20px;
+    }
+    .service-card h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; margin-bottom: .5rem; color: var(--dark); }
+    .service-card p { font-size: 13px; color: var(--mid); line-height: 1.7; font-weight: 400; }
+
+    /* TEAM */
+    .team-section { padding: 4rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .doc-card { background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid #d8d5ce; }
+    .doc-top { height: 80px; display: flex; align-items: flex-end; padding: 1rem 1.25rem; position: relative; }
+    .doc-top.teal { background: #C4EDD9; }
+    .doc-top.coral { background: #F5C4B3; }
+    .doc-top.blue { background: #B5D4F4; }
+    .doc-avatar-lg {
+      width: 64px; height: 64px; border-radius: 50%; border: 3px solid #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 700;
+      position: absolute; bottom: -24px; left: 1.25rem;
+    }
+    .doc-avatar-lg.t { background: var(--teal600); color: #fff; }
+    .doc-avatar-lg.c { background: #993C1D; color: #fff; }
+    .doc-avatar-lg.b { background: #185FA5; color: #fff; }
+    .doc-body { padding: 2.2rem 1.25rem 1.4rem; }
+    .doc-body h3 { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 3px; color: var(--dark); }
+    .doc-body .specialty { font-size: 12px; color: var(--teal800); font-weight: 700; margin-bottom: .6rem; letter-spacing: .3px; }
+    .doc-body p { font-size: 13px; color: var(--mid); line-height: 1.65; font-weight: 400; }
+
+    /* BOOKING */
+    .booking-section {
+      background: var(--teal600);
+      padding: 4rem 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .booking-inner {
+      background: #fff;
+      border-radius: 24px;
+      padding: 3rem;
+      max-width: 700px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .booking-inner h2 { font-family: 'Fraunces', serif; font-size: 1.9rem; font-weight: 400; letter-spacing: -.5px; margin-bottom: .75rem; color: var(--dark); }
+    .book-desc { font-size: 14px; color: var(--mid); line-height: 1.75; margin-bottom: 1.5rem; font-weight: 400; }
+    .check-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--dark); font-weight: 500; margin-bottom: 10px; }
+    .check-dot {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--teal600);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 10px; color: #fff; font-weight: 700;
+    }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 5px; color: var(--dark); letter-spacing: .3px; }
+    .form-group input, .form-group select {
+      width: 100%; padding: 11px 14px; border: 1.5px solid #bbb; border-radius: 10px;
+      font-size: 14px; font-family: 'DM Sans', sans-serif; background: #fff;
+      color: var(--dark); outline: none; font-weight: 400;
+      transition: border .2s;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--teal400); }
+    .book-btn {
+      width: 100%; background: var(--teal600); color: #fff; border: none; padding: 14px;
+      border-radius: 40px; font-size: 14px; font-weight: 700; cursor: pointer;
+      font-family: 'DM Sans', sans-serif; margin-top: .5rem; transition: background .2s;
+    }
+    .book-btn:hover { background: var(--teal800); }
+
+    /* FOOTER */
+    footer {
+      background: #1A1A18; color: #c8c5be; padding: 2.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 600; color: #9FE1CB; }
+    footer p { font-size: 13px; color: #c8c5be; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { color: #c8c5be; text-decoration: none; font-size: 13px; font-weight: 500; transition: color .2s; }
+    .footer-links a:hover { color: #9FE1CB; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      .booking-inner { grid-template-columns: 1fr; }
+      nav ul { display: none; }
+      h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="logo">Health<span>First</span> Clinic</div>
+    <ul>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Our Doctors</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <button class="nav-btn">Book Appointment</button>
+  </nav>
+
+  <!-- HERO -->
+  <section style="background: var(--cream);">
+    <div class="hero">
+      <div>
+        <div class="hero-label">Trusted since 2008</div>
+        <h1>Your health, <em>always</em> our priority.</h1>
+        <p class="hero-desc">Comprehensive family care with compassionate doctors, modern diagnostics, and a patient-first approach — all under one roof.</p>
+        <div class="btn-group">
+          <button class="btn-primary">Book Appointment</button>
+          <button class="btn-ghost">Our Services</button>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="stats-row">
+          <div class="stat">
+            <div class="stat-num">12K+</div>
+            <div class="stat-lbl">Patients served</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">18</div>
+            <div class="stat-lbl">Specialists on staff</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">98%</div>
+            <div class="stat-lbl">Satisfaction rate</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">15yr</div>
+            <div class="stat-lbl">Experience</div>
+          </div>
+        </div>
+        <div class="doctor-row">
+          <div class="doc-avatar">DR</div>
+          <div class="doc-info">
+            <p>Dr. Reena Varma</p>
+            <span>Chief of Internal Medicine</span>
+          </div>
+          <div class="badge">Available</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services-section">
+    <div class="section-head">
+      <div class="section-label">What we offer</div>
+      <h2>Specialised care for every need</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="svc-icon">&#128137;</div>
+        <h3>Cardiology</h3>
+        <p>Heart health evaluations, ECG, stress tests, and long-term cardiac monitoring by our expert team.</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-icon">&#129307;</div>
+        <h3>Diagnostics &amp; Imaging</h3>
+        <p>Digital X-rays, ultrasound, and lab tests with fast turnaround times and accurate reporting.</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-icon">&#128102;</div>
+        <h3>Paediatrics</h3>
+        <p>Child wellness checks, vaccinations, and developmental screenings from newborn to adolescent.</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-icon">&#129504;</div>
+        <h3>Neurology</h3>
+        <p>Assessment and management of headaches, epilepsy, neuropathy, and cognitive conditions.</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-icon">&#129463;</div>
+        <h3>Dental Care</h3>
+        <p>Preventive dentistry, fillings, extractions, orthodontics, and cosmetic treatments available.</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-icon">&#129514;</div>
+        <h3>General Medicine</h3>
+        <p>Routine checkups, chronic disease management, preventive care, and health screenings.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team-section">
+    <div class="section-head" style="text-align: left; max-width: none; margin-bottom: 0;">
+      <div class="section-label">Meet the team</div>
+      <h2>Doctors you can trust</h2>
+    </div>
+    <div class="team-grid">
+      <div class="doc-card">
+        <div class="doc-top teal"><div class="doc-avatar-lg t">RV</div></div>
+        <div class="doc-body">
+          <h3>Dr. Reena Varma</h3>
+          <div class="specialty">Internal Medicine</div>
+          <p>15 years of experience in adult medicine, preventive care, and chronic disease management.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-top coral"><div class="doc-avatar-lg c">AK</div></div>
+        <div class="doc-body">
+          <h3>Dr. Arjun Krishnan</h3>
+          <div class="specialty">Cardiology</div>
+          <p>Fellowship-trained cardiologist specialising in interventional procedures and heart failure care.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-top blue"><div class="doc-avatar-lg b">PM</div></div>
+        <div class="doc-body">
+          <h3>Dr. Priya Menon</h3>
+          <div class="specialty">Paediatrics</div>
+          <p>Dedicated to children's health from infancy through adolescence with a warm, gentle approach.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="booking-section">
+    <div class="booking-inner">
+      <div>
+        <h2>Book your appointment today</h2>
+        <p class="book-desc">Same-day slots available for urgent consultations. Weekday and weekend hours to fit your schedule.</p>
+        <div class="check-item"><div class="check-dot">&#10003;</div> Mon–Sat, 8am–8pm</div>
+        <div class="check-item"><div class="check-dot">&#10003;</div> Sunday emergency hours</div>
+        <div class="check-item"><div class="check-dot">&#10003;</div> Online &amp; in-person visits</div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label>FULL NAME</label>
+          <input type="text" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label>PHONE NUMBER</label>
+          <input type="text" placeholder="+91 98765 43210">
+        </div>
+        <div class="form-group">
+          <label>DEPARTMENT</label>
+          <select>
+            <option>General Medicine</option>
+            <option>Cardiology</option>
+            <option>Paediatrics</option>
+            <option>Neurology</option>
+            <option>Dental Care</option>
+            <option>Diagnostics</option>
+          </select>
+        </div>
+        <button class="book-btn">Confirm Appointment</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">HealthFirst Clinic</div>
+    <p>© 2026 HealthFirst Clinic · 42 MG Road, Chennai, Tamil Nadu</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>
